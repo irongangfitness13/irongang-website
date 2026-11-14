@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Local test: home</title>
+<style>body{margin:0}</style>
+<script>
+  // Stand-ins for things Squarespace normally provides, so tests never
+  // count real Google Ads conversions or send real form submissions.
+  window.__conv = 0; window.__sent = 0;
+  window.gtag = function () { if (arguments[1] === 'conversion') window.__conv++; };
+  var realFetch = window.fetch;
+  window.fetch = function (u, o) {
+    if (String(u).indexOf('mailerlite') !== -1) { window.__sent++; return Promise.resolve(new Response('')); }
+    return realFetch.apply(this, arguments);
+  };
+</script>
+</head><body>
+<div id="sections"><section class="page-section"><div class="content-wrapper">
+<!-- same snippet as squarespace/home-code-block.html, but loading the local loader -->
+<div data-igf-page="home"></div>
+<script src="../loader.js"></script>
+</div></section></div>
+</body></html>

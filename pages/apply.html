@@ -1,0 +1,553 @@
+<!-- =======================================================================
+     IRON GANG FITNESS: APPLY PAGE (/apply)
+     Complete, self-contained. Paste this ENTIRE file into ONE Code Block
+     on the page, replacing everything that is in the block now.
+     You do NOT need anything in Squarespace's Code Injection settings.
+     Delete what you pasted there earlier so there is only one copy.
+     ======================================================================= -->
+<style>
+  /* 1. Hide Squarespace's native header and footer on this page only.
+        The Code Block already contains the designed nav and footer. */
+  #header,
+  #footer-sections { display:none !important; }
+
+  /* 2. Remove the section's own padding and width cap so the design
+        runs edge to edge instead of sitting inside white gutters. */
+  #sections .page-section { padding-top:0 !important; padding-bottom:0 !important; min-height:0 !important; }
+  #sections .page-section .content-wrapper { padding-left:0 !important; padding-right:0 !important; max-width:none !important; }
+  /* 2b. Remove Squarespace's leftover vertical space: section padding,
+         grid rows that reserve extra height, and block padding. */
+  #sections .page-section .content-wrapper { padding-top:0 !important; padding-bottom:0 !important; min-height:0 !important; }
+  #sections .page-section .fluid-engine { display:block !important; padding:0 !important; margin:0 !important; min-height:0 !important; height:auto !important; }
+  #sections .page-section .fluid-engine > .fe-block { grid-area:auto !important; height:auto !important; min-height:0 !important; }
+  #sections .page-section .sqs-block.code-block,
+  #sections .page-section .sqs-block.code-block .sqs-block-content { padding:0 !important; margin:0 !important; }
+  #sections .page-section .section-background { display:none !important; }
+
+  /* 3. Break the Code Block out of the grid's side gutters. */
+  .igf[id$="-root"] { width:100vw; margin-left:calc(50% - 50vw); max-width:none !important; box-sizing:border-box; }
+  html, body { overflow-x:clip; }
+  body { background:#000; }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ==================== SCOPED DESIGN SYSTEM — .igf ====================
+   Every rule is scoped under .igf so it can never leak onto the rest of
+   your Squarespace theme. Each page's Code Block wraps its content in
+   <div class="igf"> ... </div> — that's what activates all of this. */
+
+.igf, .igf *{ box-sizing:border-box; font-family:'Big Shoulders Display','Arial Narrow',sans-serif; -webkit-font-smoothing:antialiased; }
+.igf{ background:#000; color:#fff; }
+.igf a{ text-decoration:none; }
+.igf ::selection{ background:#8b1a1a; color:#fff; }
+.igf input, .igf textarea, .igf select, .igf button{ font-family:inherit; }
+.igf input::placeholder, .igf textarea::placeholder{ color:#5a5a5a; }
+.igf button{ cursor:pointer; }
+
+.igf-wrap{ max-width:1280px; margin:0 auto; padding:0 24px; }
+.igf-section{ padding:110px 24px; }
+@media (max-width:760px){ .igf-section{ padding:72px 20px; } }
+
+/* ---- eyebrow ---- */
+.igf-eyebrow{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.igf-eyebrow-bar{ display:block; width:44px; height:4px; flex:0 0 auto; }
+.igf-eyebrow-bar--red{ background:#8b1a1a; }
+.igf-eyebrow-bar--tan{ background:#d4b896; }
+.igf-eyebrow-label{ color:#d4b896; font-size:14px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; }
+.igf-eyebrow-label--lg{ font-size:20px; }
+.igf-eyebrow-label--red{ color:#8b1a1a; }
+
+/* ---- headings ---- */
+.igf-h1{ margin:0; font-weight:900; line-height:0.9; letter-spacing:-0.02em; text-transform:uppercase; color:#fff; font-size:clamp(52px,8.4vw,116px); }
+.igf-h2{ margin:0; font-weight:900; line-height:0.92; letter-spacing:-0.02em; text-transform:uppercase; color:#fff; font-size:clamp(42px,5.6vw,76px); }
+.igf-h2--dark{ color:#000; }
+.igf-h3{ margin:0; font-weight:900; letter-spacing:-0.01em; text-transform:uppercase; color:#fff; }
+.igf-body{ font-size:20px; font-weight:500; line-height:1.5; color:#e8e4dd; }
+.igf-body--muted{ color:#9a9a9a; }
+.igf-body--onlight{ color:#1c1c1c; }
+
+/* ---- buttons ---- */
+.igf-btn{ display:inline-block; border:0; padding:20px 34px; font-size:19px; font-weight:900; letter-spacing:0.08em; text-transform:uppercase; transition:background 120ms cubic-bezier(.2,0,0,1), color 120ms, transform 80ms, box-shadow 80ms; }
+.igf-btn--tan{ background:#d4b896; color:#000; box-shadow:6px 6px 0 0 #8b1a1a; }
+.igf-btn--tan:hover{ background:#e3cdae; color:#000; }
+.igf-btn--tan:active{ background:#b99a76; transform:translate(2px,2px); box-shadow:4px 4px 0 0 #8b1a1a; }
+.igf-btn--outline-white{ border:2px solid #fff; color:#fff; background:rgba(0,0,0,0.35); }
+.igf-btn--outline-white:hover{ background:#fff; color:#000; }
+.igf-btn--red{ background:#8b1a1a; color:#fff; }
+.igf-btn--red:hover{ background:#a82323; }
+.igf-btn--red:active{ background:#6d1313; }
+.igf-btn--black-stamp{ background:#000; color:#fff; box-shadow:6px 6px 0 0 #000; }
+.igf-btn--black-stamp:hover{ background:#fff; color:#8b1a1a; }
+.igf-btn--black-stamp:active{ transform:translate(2px,2px); }
+
+/* ---- nav ---- */
+.igf-header{ position:sticky; top:0; z-index:60; background:#000; border-bottom:1px solid #2a2a2a; }
+.igf-header-row{ max-width:1280px; margin:0 auto; padding:0 24px; height:78px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.igf-logo img{ height:46px; width:auto; display:block; }
+.igf-nav-desktop{ display:flex; align-items:center; gap:34px; }
+.igf-nav-link{ display:block; padding:6px 0; color:#fff; font-size:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; border-bottom:2px solid transparent; }
+.igf-nav-link:hover{ color:#d4b896; border-bottom-color:#d4b896; }
+.igf-nav-apply{ background:#8b1a1a; color:#fff; padding:13px 24px; font-size:16px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; transition:background 120ms cubic-bezier(.2,0,0,1); }
+.igf-nav-apply:hover{ background:#a82323; color:#fff; }
+.igf-nav-apply:active{ background:#6d1313; }
+.igf-burger{ display:none; align-items:center; justify-content:center; width:48px; height:48px; background:transparent; border:1px solid #2a2a2a; color:#fff; padding:0; }
+.igf-burger-bar{ display:block; width:22px; height:2px; background:#fff; box-shadow:0 -7px 0 #fff, 0 7px 0 #fff; }
+.igf-mobile-menu{ display:none; border-top:1px solid #2a2a2a; background:#0a0a0a; padding:8px 24px 24px; flex-direction:column; }
+.igf-mobile-menu.is-open{ display:flex; }
+.igf-mobile-link{ display:block; padding:16px 0; border-bottom:1px solid #1c1c1c; color:#fff; font-size:22px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; }
+.igf-mobile-apply{ display:block; margin-top:20px; background:#8b1a1a; color:#fff; text-align:center; padding:18px; font-size:20px; font-weight:900; letter-spacing:0.1em; text-transform:uppercase; }
+@media (max-width:960px){
+  .igf-nav-apply{ padding:11px 18px; font-size:14px; }
+}
+
+/* ---- footer ---- */
+.igf-foot{ background:#000; border-top:4px solid #8b1a1a; padding:72px 24px 40px; }
+.igf-foot-grid{ display:grid; grid-template-columns:1.6fr 1fr 1.2fr; gap:48px; align-items:start; }
+.igf-foot-brand p{ margin:0; max-width:320px; color:#9a9a9a; font-size:17px; font-weight:500; line-height:1.5; }
+.igf-foot-col{ display:flex; flex-direction:column; gap:14px; }
+.igf-foot-head{ color:#d4b896; font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; }
+.igf-foot-link{ color:#e8e4dd; font-size:17px; font-weight:600; }
+.igf-foot-link:hover{ color:#d4b896; }
+.igf-foot-apply{ margin-top:8px; display:block; text-align:center; border:2px solid #fff; color:#fff; padding:14px 20px; font-size:15px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; }
+.igf-foot-apply:hover{ background:#fff; color:#000; }
+.igf-foot-bottom{ margin-top:56px; padding-top:24px; border-top:1px solid #1c1c1c; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; }
+.igf-foot-copy{ color:#6b6b6b; font-size:14px; font-weight:500; letter-spacing:0.04em; }
+.igf-foot-tag{ color:#6b6b6b; font-size:14px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; }
+.igf-foot-tag span{ color:#8b1a1a; }
+@media (max-width:960px){ .igf-foot-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:620px){ .igf-foot-grid{ grid-template-columns:1fr; } }
+
+/* ---- grids ---- */
+.igf-stack{ display:grid; gap:64px; align-items:start; }
+.igf-stack-2{ grid-template-columns:1fr 1fr; }
+.igf-stack-method{ grid-template-columns:1fr 1.1fr; }
+.igf-stack-coach{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); }
+@media (max-width:960px){ .igf-stack{ grid-template-columns:1fr !important; } }
+
+.igf-quad{ display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:#2a2a2a; border:1px solid #2a2a2a; }
+@media (max-width:960px){ .igf-quad{ grid-template-columns:1fr 1fr; } }
+@media (max-width:620px){ .igf-quad{ grid-template-columns:1fr; } }
+
+.igf-trio{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:#2a2a2a; border:1px solid #2a2a2a; }
+@media (max-width:620px){ .igf-trio{ grid-template-columns:1fr; } }
+
+.igf-trio-loose{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; justify-items:center; }
+@media (max-width:620px){ .igf-trio-loose{ grid-template-columns:1fr; } }
+
+.igf-two{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:620px){ .igf-two{ grid-template-columns:1fr; } }
+
+/* ---- guide grid cards ---- */
+.igf-guide-card{ display:flex; flex-direction:column; justify-content:space-between; gap:40px; background:#0a0a0a; padding:36px 30px 30px; min-height:340px; transition:background 120ms cubic-bezier(.2,0,0,1); }
+.igf-guide-card:hover{ background:#1c1c1c; }
+.igf-guide-num{ color:#8b1a1a; font-size:13px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; }
+.igf-guide-title{ margin:14px 0 0; color:#fff; font-size:38px; font-weight:900; line-height:0.95; letter-spacing:-0.01em; text-transform:uppercase; }
+.igf-guide-copy{ margin:14px 0 0; color:#9a9a9a; font-size:18px; font-weight:500; line-height:1.45; }
+.igf-guide-cta{ color:#d4b896; font-size:15px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; }
+
+/* ---- method steps ---- */
+.igf-method-list{ display:flex; flex-direction:column; gap:2px; background:#000; }
+.igf-method-step{ background:#fff; padding:32px; border-left:6px solid #8b1a1a; }
+.igf-method-num{ color:#8b1a1a; font-size:20px; font-weight:900; letter-spacing:0.1em; }
+.igf-method-title{ font-size:32px; }
+.igf-method-copy{ margin:12px 0 0; color:#3d3d3d; font-size:18px; font-weight:500; line-height:1.5; }
+
+/* ---- fit rows ---- */
+.igf-fit-list{ display:flex; flex-direction:column; gap:2px; background:#2a2a2a; border:1px solid #2a2a2a; }
+.igf-fit-row{ background:#0a0a0a; padding:26px 28px; display:flex; gap:18px; align-items:baseline; }
+.igf-fit-row--tan{ border-left:6px solid #d4b896; }
+.igf-fit-row--red{ border-left:6px solid #8b1a1a; }
+.igf-fit-num{ font-size:18px; font-weight:900; letter-spacing:0.1em; flex:0 0 auto; }
+.igf-fit-num--tan{ color:#d4b896; }
+.igf-fit-num--red{ color:#8b1a1a; }
+.igf-fit-copy{ margin:0; font-size:18px; font-weight:500; line-height:1.5; }
+.igf-fit-copy--light{ color:#e8e4dd; }
+.igf-fit-copy--muted{ color:#9a9a9a; }
+
+/* ---- ways to train / coach cards ---- */
+.igf-tier-card{ background:#0a0a0a; padding:38px 32px; display:flex; flex-direction:column; gap:18px; }
+.igf-tier-kicker{ color:#8b1a1a; font-size:18px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; }
+.igf-tier-title{ margin:0; color:#fff; font-size:36px; font-weight:900; line-height:0.95; text-transform:uppercase; }
+.igf-tier-copy{ margin:0; color:#9a9a9a; font-size:18px; font-weight:500; line-height:1.5; }
+
+.igf-coach-card{ display:grid; border:1px solid #2a2a2a; background:#000; text-decoration:none; }
+.igf-coach-card:hover{ border-color:#d4b896; }
+.igf-coach-photo{ position:relative; width:100%; min-height:460px; background-size:cover; background-position:center; }
+.igf-coach-body{ padding:48px; display:flex; flex-direction:column; justify-content:center; }
+.igf-coach-name{ margin:0; color:#fff; font-size:44px; font-weight:900; letter-spacing:-0.01em; line-height:0.95; text-transform:uppercase; }
+.igf-coach-role{ margin-top:10px; color:#d4b896; font-size:15px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; }
+.igf-coach-copy{ margin:20px 0 0; max-width:52ch; color:#9a9a9a; font-size:19px; font-weight:500; line-height:1.5; }
+
+/* ---- proof / testimonials ---- */
+.igf-proof-card{ width:100%; max-width:360px; border:1px solid #2a2a2a; background:#0a0a0a; }
+.igf-proof-thumb{ position:relative; display:block; width:100%; aspect-ratio:9/16; background:#000; overflow:hidden; }
+.igf-proof-thumb:hover{ opacity:0.92; }
+.igf-proof-thumb img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.25) contrast(1.05); }
+.igf-proof-scrim{ position:absolute; inset:0; background:rgba(0,0,0,0.35); }
+.igf-proof-play{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; justify-content:center; width:74px; height:74px; background:#8b1a1a; box-shadow:5px 5px 0 0 #000; }
+.igf-proof-triangle{ display:block; width:0; height:0; border-left:24px solid #fff; border-top:15px solid transparent; border-bottom:15px solid transparent; margin-left:6px; }
+.igf-proof-label{ position:absolute; left:16px; bottom:16px; color:#d4b896; font-size:13px; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; }
+.igf-proof-caption{ padding:22px 24px; color:#9a9a9a; font-size:16px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; }
+.igf-cred-link{ color:#d4b896; text-decoration:none; border-bottom:2px solid #8b1a1a; padding-bottom:2px; }
+.igf-cred-link:hover{ color:#e3cdae; border-bottom-color:#a82323; }
+
+/* ---- apply form ---- */
+.igf-form-stack{ display:flex; flex-direction:column; gap:2px; background:#2a2a2a; border:1px solid #2a2a2a; }
+.igf-form-panel{ background:#0a0a0a; padding:40px 34px; }
+.igf-form-panel-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:26px; }
+.igf-form-step-num{ color:#8b1a1a; font-size:15px; font-weight:900; letter-spacing:0.16em; }
+.igf-form-step-title{ margin:0; color:#fff; font-size:30px; font-weight:900; letter-spacing:0.01em; text-transform:uppercase; }
+.igf-field{ display:flex; flex-direction:column; }
+.igf-field-label{ display:block; margin-bottom:8px; color:#d4b896; font-size:16px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; }
+.igf-field-hint{ margin:0 0 10px; color:#6b6b6b; font-size:16px; font-weight:500; line-height:1.4; }
+.igf-input, .igf-select, .igf-textarea{ width:100%; background:#000; border:1px solid #2a2a2a; color:#fff; font-size:19px; font-weight:500; padding:15px; }
+.igf-textarea{ font-size:18px; line-height:1.5; resize:vertical; }
+.igf-input:focus, .igf-select:focus, .igf-textarea:focus{ outline:2px solid #d4b896; outline-offset:2px; border-color:#d4b896; }
+.igf-commit-list{ display:flex; flex-direction:column; gap:2px; background:#2a2a2a; border:1px solid #2a2a2a; }
+.igf-commit-btn{ cursor:pointer; border:0; text-align:left; background:#000; padding:20px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%; }
+.igf-commit-btn:hover{ background:#1c1c1c; }
+.igf-commit-btn span:first-child{ color:#fff; font-size:19px; font-weight:600; line-height:1.4; }
+.igf-commit-badge{ display:none; flex:0 0 auto; background:#8b1a1a; color:#fff; padding:5px 12px; font-size:12px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; }
+.igf-commit-btn.is-selected .igf-commit-badge{ display:block; }
+.igf-form-foot{ background:#0a0a0a; padding:36px 34px; display:flex; flex-direction:column; gap:18px; }
+.igf-form-error{ display:none; background:#8b1a1a; color:#fff; padding:14px 18px; font-size:17px; font-weight:700; letter-spacing:0.03em; }
+.igf-form-error.is-visible{ display:block; }
+.igf-submit-btn{ border:0; background:#8b1a1a; color:#fff; padding:24px; font-size:21px; font-weight:900; letter-spacing:0.1em; text-transform:uppercase; box-shadow:7px 7px 0 0 #d4b896; transition:background 120ms cubic-bezier(.2,0,0,1); }
+.igf-submit-btn:hover{ background:#a82323; }
+.igf-submit-btn:active{ background:#6d1313; transform:translate(2px,2px); box-shadow:5px 5px 0 0 #d4b896; }
+.igf-form-footnote{ margin:0; color:#6b6b6b; font-size:16px; font-weight:500; line-height:1.45; }
+.igf-form-success{ display:none; border:1px solid #2a2a2a; border-top:4px solid #8b1a1a; background:#0a0a0a; padding:56px 40px; flex-direction:column; align-items:flex-start; gap:20px; }
+.igf-form-success.is-visible{ display:flex; }
+.igf-form-success h2{ margin:0; color:#fff; font-size:clamp(38px,5.4vw,68px); font-weight:900; line-height:0.92; letter-spacing:-0.02em; text-transform:uppercase; }
+.igf-form-success p{ margin:0; color:#e8e4dd; font-size:20px; font-weight:500; line-height:1.5; max-width:56ch; }
+.igf-form-success p.muted{ color:#6b6b6b; font-size:18px; }
+</style>
+
+<script>
+/* ==================== IRON GANG FITNESS — SHARED CONFIG + JS ====================
+   Edit ONLY the values inside IGF_CONFIG below to wire the live site up.
+   Nothing else in this block needs to change. */
+window.IGF_CONFIG = {
+
+  /* --- MailerLite -------------------------------------------------
+     1. In MailerLite: Forms > Embedded form > create the application
+        form (and, later, one per guide, or one form + a "Guide" field).
+     2. Copy the form's POST action URL:
+        https://assets.mailerlite.com/jsonp/123456/forms/987654321/subscribe
+     3. Paste it below. Until you do, the form runs in DEMO MODE: it
+        validates and shows the success screen, but the lead is only
+        logged to the browser console — nobody receives it.
+  ------------------------------------------------------------------ */
+  mailerliteAction: '',          // guide / email-capture forms (not built in this package)
+  mailerliteApplyAction: 'https://assets.mailerlite.com/jsonp/2469049/forms/201874202245990065/subscribe',     // <-- PASTE YOUR APPLICATION FORM'S ACTION URL HERE
+
+  gymName: 'Elev8tion Fitness',
+  city: 'Boca Raton, FL',
+  email: 'info@irongangfit.com',
+  instagram: 'https://www.instagram.com/irongangfitness'
+};
+
+/* Shared submit helper used by every Apply form on the site. */
+window.igfSubmit = function (action, payload) {
+  if (!action) {
+    console.info('[Iron Gang] DEMO MODE — no MailerLite action URL configured. Payload:', payload);
+    return new Promise(function (r) { setTimeout(r, 650); });
+  }
+  var body = new FormData();
+  Object.keys(payload).forEach(function (k) { body.append('fields[' + k + ']', payload[k]); });
+  body.append('ml-submit', '1');
+  body.append('anticsrf', 'true');
+  return fetch(action, { method: 'POST', body: body, mode: 'no-cors' });
+};
+
+/* ==================== Shared nav burger toggle ==================== */
+window.IGF = window.IGF || {};
+IGF.initNav = function (root) {
+  var burger = root.querySelector('[data-igf-burger]');
+  var menu = root.querySelector('[data-igf-mobile-menu]');
+  if (!burger || !menu) return;
+  burger.addEventListener('click', function () {
+    menu.classList.toggle('is-open');
+  });
+};
+
+/* ==================== Shared Apply form mount ====================
+   Call IGF.mountApplyForm(document.getElementById('some-id'), 'website-apply')
+   Reproduces ApplyForm.dc.html field-for-field: same fields, same
+   validation order and copy, same success-state swap. */
+IGF.mountApplyForm = function (container, source) {
+  var state = {
+    fullName:'', email:'', phone:'', format:'',
+    situation:'', goal:'', tried:'', experience:'', days:'',
+    timeline:'', investment:'', commitment:'', referral:'',
+    sending:false
+  };
+
+  container.innerHTML =
+    '<div class="igf-form-stack" data-igf-form-notSent>' +
+
+      '<div class="igf-form-panel">' +
+        '<div class="igf-form-panel-head"><span class="igf-form-step-num">01</span><h2 class="igf-form-step-title">Who you are</h2></div>' +
+        '<div class="igf-two">' +
+          '<div class="igf-field"><label class="igf-field-label" for="igf-name">Full name</label>' +
+            '<input class="igf-input" id="igf-name" type="text" placeholder="First and last"></div>' +
+          '<div class="igf-field"><label class="igf-field-label" for="igf-email">Email</label>' +
+            '<input class="igf-input" id="igf-email" type="email" placeholder="you@example.com"></div>' +
+          '<div class="igf-field"><label class="igf-field-label" for="igf-phone">Phone</label>' +
+            '<input class="igf-input" id="igf-phone" type="tel" placeholder="(561) 000-0000"></div>' +
+          '<div class="igf-field"><label class="igf-field-label" for="igf-format">How you want to train</label>' +
+            '<select class="igf-select" id="igf-format">' +
+              '<option value="">Choose one</option>' +
+              '<option value="In-person (Boca Raton)">In-person — Boca Raton</option>' +
+              '<option value="Hybrid">Hybrid — in person + programming</option>' +
+              '<option value="Online">Online — fully remote</option>' +
+              '<option value="Not sure">Not sure yet</option>' +
+            '</select></div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="igf-form-panel">' +
+        '<div class="igf-form-panel-head"><span class="igf-form-step-num">02</span><h2 class="igf-form-step-title">What\'s going on</h2></div>' +
+        '<div style="display:flex;flex-direction:column;gap:22px">' +
+          '<div class="igf-field"><label class="igf-field-label" for="igf-situation">What hurts, or what stopped working?</label>' +
+            '<p class="igf-field-hint">Injuries, surgeries, the thing that flares up, how long it\'s been. Detail helps. Vague answers get vague plans.</p>' +
+            '<textarea class="igf-textarea" id="igf-situation" rows="4" placeholder="Left shoulder since a rugby injury in 2019. Fine benching light, sharp pain overhead past about 90 degrees…"></textarea></div>' +
+          '<div class="igf-field"><label class="igf-field-label" for="igf-goal">What are you trying to get back to?</label>' +
+            '<textarea class="igf-textarea" id="igf-goal" rows="3" placeholder="Pressing overhead again. Playing in the Sunday league without limping on Monday."></textarea></div>' +
+          '<div class="igf-field"><label class="igf-field-label" for="igf-tried">What have you already tried?</label>' +
+            '<textarea class="igf-textarea" id="igf-tried" rows="3" placeholder="PT for eight weeks, two online programs, a lot of YouTube."></textarea></div>' +
+          '<div class="igf-two">' +
+            '<div class="igf-field"><label class="igf-field-label" for="igf-exp">Training experience</label>' +
+              '<select class="igf-select" id="igf-exp">' +
+                '<option value="">Choose one</option>' +
+                '<option value="New to lifting">New to lifting</option>' +
+                '<option value="1-3 years">One to three years</option>' +
+                '<option value="3-10 years">Three to ten years</option>' +
+                '<option value="10+ years">Ten years or more</option>' +
+                '<option value="Former athlete, long layoff">Former athlete, long layoff</option>' +
+              '</select></div>' +
+            '<div class="igf-field"><label class="igf-field-label" for="igf-days">Days per week you can train</label>' +
+              '<select class="igf-select" id="igf-days">' +
+                '<option value="">Choose one</option>' +
+                '<option value="1-2">One or two</option>' +
+                '<option value="3-4">Three or four</option>' +
+                '<option value="5+">Five or more</option>' +
+              '</select></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="igf-form-panel">' +
+        '<div class="igf-form-panel-head" style="margin-bottom:10px"><span class="igf-form-step-num">03</span><h2 class="igf-form-step-title">Straight answers</h2></div>' +
+        '<p class="igf-field-hint" style="margin-bottom:26px;max-width:62ch">This part exists so neither of us wastes an afternoon. Answer it honestly — "not yet" is a completely respectable answer and we\'ll tell you so.</p>' +
+        '<div style="display:flex;flex-direction:column;gap:22px">' +
+          '<div class="igf-two">' +
+            '<div class="igf-field"><label class="igf-field-label" for="igf-when">When do you want to start?</label>' +
+              '<select class="igf-select" id="igf-when">' +
+                '<option value="">Choose one</option>' +
+                '<option value="Immediately">Immediately</option>' +
+                '<option value="Within 30 days">Within 30 days</option>' +
+                '<option value="In a few months">In a few months</option>' +
+                '<option value="Just gathering information">Just gathering information</option>' +
+              '</select></div>' +
+            '<div class="igf-field"><label class="igf-field-label" for="igf-invest">On the investment</label>' +
+              '<select class="igf-select" id="igf-invest">' +
+                '<option value="">Choose one</option>' +
+                '<option value="Ready to invest in the right fit">Ready to invest in the right fit</option>' +
+                '<option value="Open, want to see the number first">Open — want to see the number first</option>' +
+                '<option value="Looking for the lowest-cost option">Looking for the lowest-cost option</option>' +
+              '</select></div>' +
+          '</div>' +
+          '<div>' +
+            '<div class="igf-field-label" style="margin-bottom:12px">How committed are you, honestly?</div>' +
+            '<div class="igf-commit-list">' +
+              '<button type="button" class="igf-commit-btn" data-igf-commit="All in"><span>All in. I\'ll do the boring work and I\'ll show up when it isn\'t fun.</span><span class="igf-commit-badge">Selected</span></button>' +
+              '<button type="button" class="igf-commit-btn" data-igf-commit="Committed but busy"><span>Committed, but life is busy and I\'ll need the plan to be realistic.</span><span class="igf-commit-badge">Selected</span></button>' +
+              '<button type="button" class="igf-commit-btn" data-igf-commit="Curious"><span>Curious. I want to know what this involves before I commit to anything.</span><span class="igf-commit-badge">Selected</span></button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="igf-field"><label class="igf-field-label" for="igf-ref">How did you find us?</label>' +
+            '<input class="igf-input" id="igf-ref" type="text" placeholder="Instagram, a card at the gym, someone sent me…"></div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="igf-form-foot">' +
+        '<div class="igf-form-error" data-igf-error></div>' +
+        '<button type="button" class="igf-submit-btn" data-igf-submit>Submit application</button>' +
+        '<p class="igf-form-footnote">A real person reads every application. You\'ll hear back within two business days either way — including if the answer is no.</p>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="igf-form-success" data-igf-form-sent>' +
+      '<div class="igf-eyebrow-label">Application received</div>' +
+      '<h2>That\'s it. We\'ve got it.</h2>' +
+      '<p data-igf-sent-name></p>' +
+      '<p class="muted">In the meantime, see what training here actually looks like.</p>' +
+      '<a href="https://www.instagram.com/irongangfitness" target="_blank" rel="noopener" class="igf-btn igf-btn--tan" style="margin-top:8px">Follow on Instagram</a>' +
+    '</div>';
+
+  var notSentEl = container.querySelector('[data-igf-form-notSent]');
+  var sentEl = container.querySelector('[data-igf-form-sent]');
+  var errorEl = container.querySelector('[data-igf-error]');
+  var submitBtn = container.querySelector('[data-igf-submit]');
+  var commitBtns = container.querySelectorAll('[data-igf-commit]');
+
+  commitBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.commitment = btn.getAttribute('data-igf-commit');
+      commitBtns.forEach(function (b) { b.classList.toggle('is-selected', b === btn); });
+    });
+  });
+
+  function val(id) { return container.querySelector('#' + id).value; }
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    errorEl.classList.add('is-visible');
+  }
+  function clearError() {
+    errorEl.textContent = '';
+    errorEl.classList.remove('is-visible');
+  }
+
+  submitBtn.addEventListener('click', function () {
+    if (state.sending) return;
+
+    state.fullName = val('igf-name');
+    state.email = val('igf-email');
+    state.phone = val('igf-phone');
+    state.format = val('igf-format');
+    state.situation = val('igf-situation');
+    state.goal = val('igf-goal');
+    state.tried = val('igf-tried');
+    state.experience = val('igf-exp');
+    state.days = val('igf-days');
+    state.timeline = val('igf-when');
+    state.investment = val('igf-invest');
+    state.referral = val('igf-ref');
+
+    if (!state.fullName.trim()) return showError('We need your name.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(state.email.trim())) return showError('That email address will not work.');
+    if (!state.format) return showError('Pick how you want to train — in person, hybrid, or online.');
+    if (state.situation.trim().length < 25) return showError('Tell us more about what is going on. A sentence or two is not enough to go on.');
+    if (!state.timeline) return showError('Let us know when you want to start.');
+    if (!state.investment) return showError('Answer the investment question. It saves us both time.');
+    if (!state.commitment) return showError('Pick a commitment level. Honestly, not aspirationally.');
+
+    clearError();
+    state.sending = true;
+    submitBtn.textContent = 'Sending…';
+
+    var finish = function () {
+      state.sending = false;
+      var first = state.fullName.trim().split(' ')[0];
+      sentEl.querySelector('[data-igf-sent-name]').textContent =
+        (first ? 'Thanks, ' + first + '. ' : '') +
+        'We read applications ourselves, in order, and you\'ll get a straight answer within two business days — yes, not yet, or a recommendation to see someone else first.';
+      notSentEl.style.display = 'none';
+      sentEl.classList.add('is-visible');
+    };
+
+    Promise.resolve(window.igfSubmit(
+      (window.IGF_CONFIG && (window.IGF_CONFIG.mailerliteApplyAction || window.IGF_CONFIG.mailerliteAction)) || '',
+      {
+        name: state.fullName.trim(), email: state.email.trim(), phone: state.phone.trim(),
+        format: state.format, situation: state.situation.trim(), goal: state.goal.trim(),
+        tried: state.tried.trim(), experience: state.experience, days: state.days,
+        timeline: state.timeline, investment: state.investment, commitment: state.commitment,
+        referral: state.referral.trim(), lead_source: source || 'website-apply'
+      }
+    )).then(function () {
+      if (window.gtag) { gtag('event', 'conversion', {'send_to': 'AW-594857657/o00jCNmMr7oZELmd05sC'}); }
+      finish();
+    }).catch(finish);
+  });
+};
+</script>
+
+<div class="igf" id="igf-apply-root">
+
+  <!-- ============================ NAV ============================ -->
+  <header class="igf-header" data-igf-nav>
+    <div class="igf-header-row">
+      <a href="/" class="igf-logo"><img src="https://images.squarespace-cdn.com/content/v1/6626bfc2221b6f7ad49c0f4d/1727a4fc-16aa-4f9c-a2eb-2516be9b825b/Iron+Gang+Logo+Banner.png?format=500w" alt="Iron Gang Fitness"></a>
+      <nav class="igf-nav-desktop">
+        <a href="/apply" class="igf-nav-apply">Apply</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================ APPLY HERO ============================ -->
+  <section style="background:#000;border-bottom:1px solid #2a2a2a;padding:80px 24px 64px">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="igf-eyebrow"><span class="igf-eyebrow-bar igf-eyebrow-bar--red"></span><span class="igf-eyebrow-label">Application</span></div>
+      <h1 class="igf-h1" style="font-size:clamp(46px,7vw,92px);max-width:16ch">Tell us what's actually going on</h1>
+      <p class="igf-body" style="margin:24px 0 0;max-width:58ch">No discovery call, no calendar link, no forty-minute conversation that turns out to be a sales pitch. You write it down, we read it, and you get a straight answer within two business days.</p>
+    </div>
+  </section>
+
+  <!-- ============================ APPLICATION FORM ============================ -->
+  <section style="background:#000;padding:56px 24px 104px">
+    <div style="max-width:1080px;margin:0 auto" id="igf-apply-form"></div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="igf-foot">
+    <div class="igf-wrap">
+      <div class="igf-foot-grid">
+        <div class="igf-foot-brand" style="display:flex;flex-direction:column;gap:20px">
+          <img src="https://images.squarespace-cdn.com/content/v1/6626bfc2221b6f7ad49c0f4d/1727a4fc-16aa-4f9c-a2eb-2516be9b825b/Iron+Gang+Logo+Banner.png?format=500w" alt="Iron Gang Fitness" style="height:62px;width:auto;display:block;align-self:flex-start">
+          <p>Science-based strength coaching for people who have been told to just rest it. We rebuild beat-up bodies so they can train like athletes again.</p>
+        </div>
+        <div class="igf-foot-col">
+          <div class="igf-foot-head">Site</div>
+          <a href="/" class="igf-foot-link">Home</a>
+        </div>
+        <div class="igf-foot-col">
+          <div class="igf-foot-head">Find Us</div>
+          <div style="color:#e8e4dd;font-size:17px;font-weight:600;line-height:1.45">Elev8tion Fitness<br>Boca Raton, FL</div>
+          <a href="mailto:info@irongangfit.com" class="igf-foot-link">info@irongangfit.com</a>
+          <a href="https://www.instagram.com/irongangfitness" target="_blank" rel="noopener" class="igf-foot-link">Instagram</a>
+          <a href="/apply" class="igf-foot-apply">Apply for Coaching</a>
+        </div>
+      </div>
+      <div class="igf-foot-bottom">
+        <div class="igf-foot-copy">© 2026 Iron Gang Fitness. All rights reserved.</div>
+        <div class="igf-foot-tag">Built for humans. <span>Not algorithms.</span></div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script>
+  IGF.initNav(document.getElementById('igf-apply-root'));
+  IGF.mountApplyForm(document.getElementById('igf-apply-form'), 'website-apply');
+</script>
+
+<script>
+/* Full-width fix: measures where the Code Block actually sits and
+   stretches the design to the full browser width from there. */
+(function(){
+  function fit(root){
+    root.style.marginLeft = '0px';
+    root.style.width = 'auto';
+    var vw = document.documentElement.clientWidth;
+    var left = root.getBoundingClientRect().left;
+    root.style.width = vw + 'px';
+    root.style.marginLeft = (-left) + 'px';
+  }
+  function fitAll(){
+    var roots = document.querySelectorAll('.igf[id$="-root"]');
+    for (var i = 0; i < roots.length; i++) fit(roots[i]);
+  }
+  fitAll();
+  document.addEventListener('DOMContentLoaded', fitAll);
+  window.addEventListener('load', fitAll);
+  window.addEventListener('resize', fitAll);
+  setTimeout(fitAll, 600);
+})();
+</script>
