@@ -214,6 +214,7 @@
 .igf-commit-badge{ display:none; flex:0 0 auto; background:#8b1a1a; color:#fff; padding:5px 12px; font-size:12px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; }
 .igf-commit-btn.is-selected .igf-commit-badge{ display:block; }
 .igf-form-foot{ background:#0a0a0a; padding:36px 34px; display:flex; flex-direction:column; gap:18px; }
+.igf-hp{ position:absolute !important; left:-10000px !important; top:auto; width:1px; height:1px; overflow:hidden; }
 .igf-form-error{ display:none; background:#8b1a1a; color:#fff; padding:14px 18px; font-size:17px; font-weight:700; letter-spacing:0.03em; }
 .igf-form-error.is-visible{ display:block; }
 .igf-submit-btn{ border:0; background:#8b1a1a; color:#fff; padding:24px; font-size:21px; font-weight:900; letter-spacing:0.1em; text-transform:uppercase; box-shadow:7px 7px 0 0 #d4b896; transition:background 120ms cubic-bezier(.2,0,0,1); }
@@ -286,6 +287,7 @@ IGF.mountApplyForm = function (container, source) {
     timeline:'', investment:'', commitment:'', referral:'',
     sending:false
   };
+  var mountedAt = Date.now();   // bot check: real people take more than a few seconds
 
   container.innerHTML =
     '<div class="igf-form-stack" data-igf-form-notSent>' +
@@ -375,6 +377,9 @@ IGF.mountApplyForm = function (container, source) {
         '</div>' +
       '</div>' +
 
+      /* Bot trap: hidden from people and screen readers; bots that fill every box fill this one. */
+      '<div class="igf-hp" aria-hidden="true"><label for="igf-website">Website</label>' +
+        '<input id="igf-website" name="company_website" type="text" tabindex="-1" autocomplete="off"></div>' +
       '<div class="igf-form-foot">' +
         '<div class="igf-form-error" data-igf-error></div>' +
         '<button type="button" class="igf-submit-btn" data-igf-submit>Submit application</button>' +
@@ -414,7 +419,7 @@ IGF.mountApplyForm = function (container, source) {
     errorEl.classList.remove('is-visible');
   }
 
-  submitBtn.addEventListener('click', function () {
+  submitBtn.addEventListener('click', function (e) {
     if (state.sending) return;
 
     state.fullName = val('igf-name');
@@ -439,6 +444,7 @@ IGF.mountApplyForm = function (container, source) {
     if (!state.commitment) return showError('Pick a commitment level. Honestly, not aspirationally.');
 
     clearError();
+
     state.sending = true;
     submitBtn.textContent = 'Sending…';
 
@@ -451,6 +457,13 @@ IGF.mountApplyForm = function (container, source) {
       notSentEl.style.display = 'none';
       sentEl.classList.add('is-visible');
     };
+
+    // Bot checks. A bot gets the normal thank-you screen, but nothing is sent
+    // to MailerLite and no Google Ads conversion is counted.
+    var isBot = val('igf-website') !== '' ||          // filled the hidden box
+                Date.now() - mountedAt < 4000 ||       // whole application in under 4 seconds
+                (e && e.isTrusted === false);           // "clicked" by a script, not a person
+    if (isBot) { finish(); return; }
 
     Promise.resolve(window.igfSubmit(
       (window.IGF_CONFIG && (window.IGF_CONFIG.mailerliteApplyAction || window.IGF_CONFIG.mailerliteAction)) || '',

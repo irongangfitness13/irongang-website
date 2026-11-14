@@ -353,6 +353,7 @@
 .kgp .ml-form-successBody,
 .kgp .ml-form-successContent{margin:0;padding:0;width:100%;box-sizing:border-box;}
 .kgp .ml-form-embedSubmit button.loading{display:none;}
+.kgp .kgp-hp{position:absolute !important;left:-10000px !important;top:auto;width:1px;height:1px;overflow:hidden;}
 
 /* validation state, in brand colours rather than browser red */
 .kgp .ml-error input,
@@ -732,6 +733,8 @@ body{background:#080807 !important;}
 
          </div>
 
+         <!-- Bot trap: hidden from people and screen readers; bots that fill every box fill this one. -->
+         <div class="kgp-hp" aria-hidden="true"><label for="kgp-website">Website</label><input id="kgp-website" name="company_website" type="text" tabindex="-1" autocomplete="off"></div>
          <input type="hidden" name="fields[lead_source]" value="kgp-landing">
          <input type="hidden" name="ml-submit" value="1">
          <input type="hidden" name="anticsrf" value="true">
@@ -829,6 +832,31 @@ body{background:#080807 !important;}
     $('.ml-subscribe-form-47548792 .row-form').hide();
     if (window.gtag) { gtag('event', 'conversion', {'send_to': 'AW-594857657/o00jCNmMr7oZELmd05sC'}); }
   }
+</script>
+<script>
+  /* Bot checks, run before MailerLite sees the submit. A bot gets the normal
+     "Check your inbox" panel, but nothing is sent and no conversion is counted.
+     Listens on the outer container in the capture phase so it runs first. */
+  (function () {
+    var box = document.getElementById('mlb2-47548792');
+    if (!box) return;
+    var shownAt = Date.now();
+    var clickedByScript = false;
+    box.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('button[type=submit]')) clickedByScript = !e.isTrusted;
+    }, true);
+    box.addEventListener('submit', function (e) {
+      var hp = box.querySelector('#kgp-website');
+      var isBot = (hp && hp.value !== '') ||          // filled the hidden box
+                  Date.now() - shownAt < 3000 ||       // submitted within 3 seconds of the page loading
+                  clickedByScript;                     // button "clicked" by a script, not a person
+      if (!isBot) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      box.querySelector('.row-success').style.display = '';
+      box.querySelector('.row-form').style.display = 'none';
+    }, true);
+  })();
 </script>
 <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
 <script>fetch("https://assets.mailerlite.com/jsonp/2469049/forms/202204428617385712/takel")</script>
