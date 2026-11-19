@@ -6,16 +6,16 @@
      ======================================================================= -->
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  /* Squarespace page: show only the card. Hides the site header/footer and
+  /* Squarespace page: show only the card (works on both the #sections and the newer #page-regions layouts). Hides the site header/footer and
      the section's padding on THIS page only (this CSS loads only here). */
   #header, #footer-sections { display:none !important; }
-  #sections .page-section { padding:0 !important; min-height:0 !important; }
-  #sections .page-section .content-wrapper { padding:0 !important; max-width:none !important; min-height:0 !important; }
-  #sections .page-section .fluid-engine { display:block !important; padding:0 !important; margin:0 !important; min-height:0 !important; height:auto !important; }
-  #sections .page-section .fluid-engine > .fe-block { grid-area:auto !important; height:auto !important; min-height:0 !important; }
-  #sections .page-section .sqs-block.code-block,
-  #sections .page-section .sqs-block.code-block .sqs-block-content { padding:0 !important; margin:0 !important; }
-  #sections .page-section .section-background { display:none !important; }
+  .page-section { padding:0 !important; min-height:0 !important; }
+  .page-section .content-wrapper { padding:0 !important; max-width:none !important; min-height:0 !important; }
+  .page-section .fluid-engine { display:block !important; padding:0 !important; margin:0 !important; min-height:0 !important; height:auto !important; }
+  .page-section .fluid-engine > .fe-block { grid-area:auto !important; height:auto !important; min-height:0 !important; }
+  .page-section .sqs-block,
+  .page-section .sqs-block .sqs-block-content { padding:0 !important; margin:0 !important; }
+  .page-section .section-background { display:none !important; }
   html, body { background:#080807 !important; }
 </style>
 <style>
