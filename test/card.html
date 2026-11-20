@@ -10,7 +10,7 @@
   var realFetch = window.fetch;
   window.fetch = function (u, o) {
     if (String(u).indexOf('mailerlite') !== -1) { window.__sent++; return Promise.resolve(new Response('')); }
-    return realFetch.card(this, arguments);
+    return realFetch.apply(this, arguments);
   };
 </script>
 </head><body>
