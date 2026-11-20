@@ -13,7 +13,8 @@ snippet per page that loads it.
 - `pages/apply.html` → irongangfit.com/apply
 - `pages/kgp.html`   → irongangfit.com/kgp (Killer Golf Performance spin-off; its CSS is at the top of this file)
 - `pages/card.html`  → KGP digital business card (Squarespace page URL set by the owner; hides the site header/footer)
-- `assets/` — images for the card and `Josh-Gangaware-KGP.vcf` (the "Save my contact" file; edit it to change contact details)
+- `pages/igf-card.html` → Iron Gang Fitness digital business card (Squarespace page URL set by the owner; hides the site header/footer)
+- `assets/` — images for the card and `Josh-Gangaware-KGP.vcf` / `Josh-Gangaware-IGF.vcf` (the cards' "Save contact" files; edit them to change contact details), and `fonts/` for the IGF card
 - `loader.js` — fetches `pages/<name>.html` into `<div data-igf-page="<name>">` and re-runs its scripts in order
 - `squarespace/` — exactly what is pasted into Squarespace (only changes if a page is added)
 - `test/` — local test pages; they stub `gtag` and MailerLite so tests never count conversions or submit leads

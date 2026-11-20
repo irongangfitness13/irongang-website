@@ -1,0 +1,107 @@
+<!-- =======================================================================
+     IRON GANG FITNESS: DIGITAL BUSINESS CARD
+     Loaded into Squarespace by loader.js (snippet: squarespace/igf-card-code-block.html).
+     Logo, fonts and the contact file live in assets/ in this repo.
+     Contact details for "Save contact" are in assets/Josh-Gangaware-IGF.vcf.
+     ======================================================================= -->
+<style>
+  /* Squarespace page: show only the card. Hides the site header/footer and
+     the section's padding on THIS page only (this CSS loads only here). */
+  #header, #footer-sections { display:none !important; }
+  .page-section { padding:0 !important; min-height:0 !important; }
+  .page-section .content-wrapper { padding:0 !important; max-width:none !important; min-height:0 !important; }
+  .page-section .fluid-engine { display:block !important; padding:0 !important; margin:0 !important; min-height:0 !important; height:auto !important; }
+  .page-section .fluid-engine > .fe-block { grid-area:auto !important; height:auto !important; min-height:0 !important; }
+  .page-section .sqs-block,
+  .page-section .sqs-block .sqs-block-content { padding:0 !important; margin:0 !important; }
+  .page-section .section-background { display:none !important; }
+  html, body { background:#000 !important; }
+</style>
+<style>
+/* Iron Gang virtual card. Every rule is scoped to #igc so it can sit inside a Squarespace Code Block. */
+@font-face{font-family:'IGC Display';font-weight:900;font-display:swap;src:url(https://irongangfitness13.github.io/irongang-website/assets/fonts/igc-display-900.woff2) format('woff2')}
+@font-face{font-family:'IGC Display';font-weight:700;font-display:swap;src:url(https://irongangfitness13.github.io/irongang-website/assets/fonts/igc-display-700.woff2) format('woff2')}
+@font-face{font-family:'IGC Text';font-weight:400;font-display:swap;src:url(https://irongangfitness13.github.io/irongang-website/assets/fonts/igc-text-400.woff2) format('woff2')}
+@font-face{font-family:'IGC Text';font-weight:500;font-display:swap;src:url(https://irongangfitness13.github.io/irongang-website/assets/fonts/igc-text-500.woff2) format('woff2')}
+#igc{--bg:#000;--ink:#fff;--soft:#c9c4bd;--tan:#d4b896;--red:#8b1a1a;--line:#2a2a2a;
+  box-sizing:border-box;min-height:100vh;background:var(--bg);color:var(--ink);
+  font:400 17px/1.45 'IGC Text','Arial Narrow',sans-serif;display:flex;justify-content:center;
+  border-left:10px solid var(--red)}
+#igc *{box-sizing:border-box}
+#igc h1,#igc p{color:inherit}
+#igc .wrap{width:100%;max-width:440px;padding:28px 22px 40px;display:flex;flex-direction:column;gap:22px}
+#igc .logo{display:block;width:min(78%,300px);height:auto;margin:0 auto}
+#igc .who{text-align:center;display:flex;flex-direction:column;gap:6px}
+#igc h1{margin:0;color:var(--ink);font:900 44px/0.95 'IGC Display','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.01em}
+#igc .role{margin:0;font:700 15px/1.3 'IGC Display',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--tan)}
+#igc .pitch{margin:4px 0 0;color:var(--soft);font-size:17px}
+#igc .btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:12px 16px;
+  border-radius:0;text-decoration:none;font:700 19px/1 'IGC Display',sans-serif;letter-spacing:.14em;text-transform:uppercase;
+  border:2px solid transparent;cursor:pointer;width:100%;-webkit-tap-highlight-color:transparent}
+#igc .btn:focus-visible{outline:3px solid var(--tan);outline-offset:3px}
+#igc .save{background:var(--red);color:#fff}
+#igc .save:active{background:#6f1414}
+#igc .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#igc .ghost{background:transparent;color:#fff;border-color:#4a4a4a;flex-direction:column;gap:6px;min-height:76px;font-size:16px}
+#igc .ghost:active{border-color:var(--tan)}
+#igc .ghost svg{width:24px;height:24px;stroke:var(--tan);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#igc .apply{background:var(--tan);color:#000;flex-direction:column;gap:6px;min-height:76px}
+#igc .apply small{font:500 15px/1.2 'IGC Text',sans-serif;letter-spacing:0;text-transform:none}
+#igc .facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;display:grid;gap:6px;font-size:16px}
+#igc .facts div{display:flex;justify-content:space-between;gap:12px}
+#igc .facts span:first-child{color:var(--soft)}
+#igc .facts a{color:#fff;text-decoration:none;white-space:nowrap}
+#igc .tag{margin:0;color:var(--ink);text-align:center;font:900 22px/1.05 'IGC Display',sans-serif;text-transform:uppercase}
+#igc .tag span{display:block;color:var(--tan)}
+#igc .share{background:none;border:0;color:var(--soft);font:500 15px 'IGC Text',sans-serif;text-decoration:underline;cursor:pointer;min-height:44px;align-self:center}
+#igc .toast{text-align:center;color:var(--tan);font-size:15px;min-height:20px;margin-top:-14px}
+@media (prefers-reduced-motion:no-preference){#igc .btn{transition:background .15s,border-color .15s}}
+</style>
+<main id="igc">
+<div class="wrap">
+  <img class="logo" src="https://irongangfitness13.github.io/irongang-website/assets/igf-card-logo.jpg" alt="Iron Gang Fitness skull logo" width="300" height="318">
+
+  <div class="who">
+    <h1>Josh Gangaware</h1>
+    <p class="role">Owner and Head Coach</p>
+    <p class="pitch">Strength coaching for former athletes who are done training around pain. Boca Raton, FL.</p>
+  </div>
+
+  <a class="btn save" href="https://irongangfitness13.github.io/irongang-website/assets/Josh-Gangaware-IGF.vcf">Save contact</a>
+
+  <div class="row">
+    <a class="btn ghost" href="sms:+15187443459" aria-label="Text Josh">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Text</a>
+    <a class="btn ghost" href="tel:+15187443459" aria-label="Call Josh">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>Call</a>
+    <a class="btn ghost" href="mailto:info@irongangfit.com" aria-label="Email Josh">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14"/><path d="m3 6 9 7 9-7"/></svg>Email</a>
+  </div>
+
+  <a class="btn apply" href="https://irongangfit.com/apply?utm_source=vcard&amp;utm_medium=referral">Apply for coaching<small>Tell us what hurts and when.</small></a>
+
+  <div class="facts">
+    <div><span>Text or call</span><a href="tel:+15187443459">518-744-3459</a></div>
+    <div><span>Email</span><a href="mailto:info@irongangfit.com">info@irongangfit.com</a></div>
+    <div><span>Web</span><a href="https://irongangfit.com">irongangfit.com</a></div>
+  </div>
+
+  <p class="tag">Built for humans.<span>Not algorithms.</span></p>
+
+  <button class="share" id="igc-share" type="button">Share this card</button>
+  <div class="toast" id="igc-toast" role="status" aria-live="polite"></div>
+</div>
+</main>
+<script>
+{
+  const toast = document.getElementById('igc-toast');
+  const say = t => { toast.textContent = t; };
+  document.getElementById('igc-share').addEventListener('click', async () => {
+    const data = {title: 'Josh Gangaware | Iron Gang Fitness', url: location.href};
+    try {
+      if (navigator.share) { await navigator.share(data); return; }
+      await navigator.clipboard.writeText(location.href); say('Link copied.');
+    } catch (err) { if (err && err.name !== 'AbortError') say('Copy this page link from the address bar.'); }
+  });
+}
+</script>
