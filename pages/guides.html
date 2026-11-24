@@ -1,0 +1,243 @@
+<!-- =======================================================================
+     IRON GANG FITNESS: FREE GUIDES PAGE (/guides)
+     Loaded into Squarespace by loader.js (snippet: squarespace/guides-code-block.html).
+     Header and footer match the Apply page. The guide picker (#igg) links to
+     the guides in the training app (app.irongangfit.com/back, /shoulder).
+     ======================================================================= -->
+<style>
+  /* Hide Squarespace's own header/footer and page padding on THIS page only
+     (works on both the #sections and the newer #page-regions layouts). */
+  #header, #footer-sections { display:none !important; }
+  .page-section { padding:0 !important; min-height:0 !important; }
+  .page-section .content-wrapper { padding:0 !important; max-width:none !important; min-height:0 !important; }
+  .page-section .fluid-engine { display:block !important; padding:0 !important; margin:0 !important; min-height:0 !important; height:auto !important; }
+  .page-section .fluid-engine > .fe-block { grid-area:auto !important; height:auto !important; min-height:0 !important; }
+  .page-section .sqs-block,
+  .page-section .sqs-block .sqs-block-content { padding:0 !important; margin:0 !important; }
+  .page-section .section-background { display:none !important; }
+  .igf[id$="-root"] { width:100vw; margin-left:calc(50% - 50vw); max-width:none !important; box-sizing:border-box; }
+  html, body { overflow-x:clip; }
+  html, body { background:#000 !important; }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ==================== SCOPED DESIGN SYSTEM — .igf ====================
+   Every rule is scoped under .igf so it can never leak onto the rest of
+   your Squarespace theme. Each page's Code Block wraps its content in
+   <div class="igf"> ... </div> — that's what activates all of this. */
+
+.igf, .igf *{ box-sizing:border-box; font-family:'Big Shoulders Display','Arial Narrow',sans-serif; -webkit-font-smoothing:antialiased; }
+.igf{ background:#000; color:#fff; }
+.igf a{ text-decoration:none; }
+.igf ::selection{ background:#8b1a1a; color:#fff; }
+.igf input, .igf textarea, .igf select, .igf button{ font-family:inherit; }
+.igf input::placeholder, .igf textarea::placeholder{ color:#5a5a5a; }
+.igf button{ cursor:pointer; }
+
+.igf-wrap{ max-width:1280px; margin:0 auto; padding:0 24px; }
+.igf-section{ padding:110px 24px; }
+@media (max-width:760px){ .igf-section{ padding:72px 20px; } }
+
+/* ---- eyebrow ---- */
+.igf-eyebrow{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.igf-eyebrow-bar{ display:block; width:44px; height:4px; flex:0 0 auto; }
+.igf-eyebrow-bar--red{ background:#8b1a1a; }
+.igf-eyebrow-bar--tan{ background:#d4b896; }
+.igf-eyebrow-label{ color:#d4b896; font-size:14px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; }
+.igf-eyebrow-label--lg{ font-size:20px; }
+.igf-eyebrow-label--red{ color:#8b1a1a; }
+
+/* ---- headings ---- */
+.igf-h1{ margin:0; font-weight:900; line-height:0.9; letter-spacing:-0.02em; text-transform:uppercase; color:#fff; font-size:clamp(52px,8.4vw,116px); }
+.igf-h2{ margin:0; font-weight:900; line-height:0.92; letter-spacing:-0.02em; text-transform:uppercase; color:#fff; font-size:clamp(42px,5.6vw,76px); }
+.igf-h2--dark{ color:#000; }
+.igf-h3{ margin:0; font-weight:900; letter-spacing:-0.01em; text-transform:uppercase; color:#fff; }
+.igf-body{ font-size:20px; font-weight:500; line-height:1.5; color:#e8e4dd; }
+.igf-body--muted{ color:#9a9a9a; }
+.igf-body--onlight{ color:#1c1c1c; }
+
+/* ---- buttons ---- */
+.igf-btn{ display:inline-block; border:0; padding:20px 34px; font-size:19px; font-weight:900; letter-spacing:0.08em; text-transform:uppercase; transition:background 120ms cubic-bezier(.2,0,0,1), color 120ms, transform 80ms, box-shadow 80ms; }
+.igf-btn--tan{ background:#d4b896; color:#000; box-shadow:6px 6px 0 0 #8b1a1a; }
+.igf-btn--tan:hover{ background:#e3cdae; color:#000; }
+.igf-btn--tan:active{ background:#b99a76; transform:translate(2px,2px); box-shadow:4px 4px 0 0 #8b1a1a; }
+.igf-btn--outline-white{ border:2px solid #fff; color:#fff; background:rgba(0,0,0,0.35); }
+.igf-btn--outline-white:hover{ background:#fff; color:#000; }
+.igf-btn--red{ background:#8b1a1a; color:#fff; }
+.igf-btn--red:hover{ background:#a82323; }
+.igf-btn--red:active{ background:#6d1313; }
+.igf-btn--black-stamp{ background:#000; color:#fff; box-shadow:6px 6px 0 0 #000; }
+.igf-btn--black-stamp:hover{ background:#fff; color:#8b1a1a; }
+.igf-btn--black-stamp:active{ transform:translate(2px,2px); }
+
+/* ---- nav ---- */
+.igf-header{ position:sticky; top:0; z-index:60; background:#000; border-bottom:1px solid #2a2a2a; }
+.igf-header-row{ max-width:1280px; margin:0 auto; padding:0 24px; height:78px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.igf-logo img{ height:46px; width:auto; display:block; }
+.igf-nav-desktop{ display:flex; align-items:center; gap:34px; }
+.igf-nav-link{ display:block; padding:6px 0; color:#fff; font-size:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; border-bottom:2px solid transparent; }
+.igf-nav-link:hover{ color:#d4b896; border-bottom-color:#d4b896; }
+.igf-nav-apply{ background:#8b1a1a; color:#fff; padding:13px 24px; font-size:16px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; transition:background 120ms cubic-bezier(.2,0,0,1); }
+.igf-nav-apply:hover{ background:#a82323; color:#fff; }
+.igf-nav-apply:active{ background:#6d1313; }
+.igf-burger{ display:none; align-items:center; justify-content:center; width:48px; height:48px; background:transparent; border:1px solid #2a2a2a; color:#fff; padding:0; }
+.igf-burger-bar{ display:block; width:22px; height:2px; background:#fff; box-shadow:0 -7px 0 #fff, 0 7px 0 #fff; }
+.igf-mobile-menu{ display:none; border-top:1px solid #2a2a2a; background:#0a0a0a; padding:8px 24px 24px; flex-direction:column; }
+.igf-mobile-menu.is-open{ display:flex; }
+.igf-mobile-link{ display:block; padding:16px 0; border-bottom:1px solid #1c1c1c; color:#fff; font-size:22px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; }
+.igf-mobile-apply{ display:block; margin-top:20px; background:#8b1a1a; color:#fff; text-align:center; padding:18px; font-size:20px; font-weight:900; letter-spacing:0.1em; text-transform:uppercase; }
+@media (max-width:960px){
+  .igf-nav-apply{ padding:11px 18px; font-size:14px; }
+}
+
+/* ---- footer ---- */
+.igf-foot{ background:#000; border-top:4px solid #8b1a1a; padding:72px 24px 40px; }
+.igf-foot-grid{ display:grid; grid-template-columns:1.6fr 1fr 1.2fr; gap:48px; align-items:start; }
+.igf-foot-brand p{ margin:0; max-width:320px; color:#9a9a9a; font-size:17px; font-weight:500; line-height:1.5; }
+.igf-foot-col{ display:flex; flex-direction:column; gap:14px; }
+.igf-foot-head{ color:#d4b896; font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; }
+.igf-foot-link{ color:#e8e4dd; font-size:17px; font-weight:600; }
+.igf-foot-link:hover{ color:#d4b896; }
+.igf-foot-apply{ margin-top:8px; display:block; text-align:center; border:2px solid #fff; color:#fff; padding:14px 20px; font-size:15px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; }
+.igf-foot-apply:hover{ background:#fff; color:#000; }
+.igf-foot-bottom{ margin-top:56px; padding-top:24px; border-top:1px solid #1c1c1c; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; }
+.igf-foot-copy{ color:#6b6b6b; font-size:14px; font-weight:500; letter-spacing:0.04em; }
+.igf-foot-tag{ color:#6b6b6b; font-size:14px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; }
+.igf-foot-tag span{ color:#8b1a1a; }
+@media (max-width:960px){ .igf-foot-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:620px){ .igf-foot-grid{ grid-template-columns:1fr; } }
+</style>
+
+<style>
+/* ==================== GUIDE PICKER — #igg ==================== */
+@font-face{font-family:'IGG Display';font-weight:900;font-display:swap;src:url(https://irongangfitness13.github.io/irongang-website/assets/fonts/igc-display-900.woff2) format('woff2')}
+@font-face{font-family:'IGG Display';font-weight:700;font-display:swap;src:url(https://irongangfitness13.github.io/irongang-website/assets/fonts/igc-display-700.woff2) format('woff2')}
+@font-face{font-family:'IGG Text';font-weight:400;font-display:swap;src:url(https://irongangfitness13.github.io/irongang-website/assets/fonts/igc-text-400.woff2) format('woff2')}
+#igg{--bg:#000;--ink:#fff;--soft:#d6d1ca;--tan:#d4b896;--red:#8b1a1a;--line:#333;
+  box-sizing:border-box;background:var(--bg);color:var(--ink);font:400 18px/1.45 'IGG Text','Arial Narrow',sans-serif;
+  padding:clamp(32px,6vw,72px) max(5vw,20px);border-left:10px solid var(--red)}
+#igg *{box-sizing:border-box;min-width:0}
+/* The site's shared .igf styles set a font on every element; keep this section's own fonts. */
+#igg,#igg *{font-family:'IGG Text','Arial Narrow',sans-serif}
+#igg .in{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+#igg .eyebrow{margin:0 0 10px;font:700 15px/1.2 'IGG Display',sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--tan)}
+#igg h1{margin:0;font:900 clamp(44px,8vw,76px)/.92 'IGG Display',sans-serif;text-transform:uppercase;color:var(--ink)}
+#igg .lede{margin:0;color:var(--soft);max-width:60ch}
+#igg .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#igg a.card{display:flex;flex-direction:column;gap:10px;padding:26px 24px 22px;border:2px solid var(--line);border-top:6px solid var(--red);
+  color:var(--ink);text-decoration:none;background:#0b0b0b;min-height:220px}
+#igg a.card:hover,#igg a.card:focus-visible{border-color:var(--tan);border-top-color:var(--red);outline:none}
+#igg .area{font:900 44px/.95 'IGG Display',sans-serif;text-transform:uppercase}
+#igg .for{color:var(--soft);font-size:17px;flex:1}
+#igg .go{display:flex;align-items:center;justify-content:center;min-height:52px;background:var(--tan);color:#000;
+  font:700 18px/1 'IGG Display',sans-serif;letter-spacing:.16em;text-transform:uppercase}
+#igg .foot{margin:0;color:var(--soft);font-size:16px}
+#igg .foot a{color:var(--tan);text-decoration:underline}
+@media (max-width:600px){#igg .grid{grid-template-columns:minmax(0,1fr)}#igg a.card{min-height:0}}
+@media (prefers-reduced-motion:no-preference){#igg a.card{transition:border-color .15s}}
+</style>
+
+<div class="igf" id="igf-guides-root">
+
+  <!-- ============================ NAV ============================ -->
+  <header class="igf-header" data-igf-nav>
+    <div class="igf-header-row">
+      <a href="/" class="igf-logo"><img src="https://images.squarespace-cdn.com/content/v1/6626bfc2221b6f7ad49c0f4d/1727a4fc-16aa-4f9c-a2eb-2516be9b825b/Iron+Gang+Logo+Banner.png?format=500w" alt="Iron Gang Fitness"></a>
+      <nav class="igf-nav-desktop">
+        <a href="/apply" class="igf-nav-apply">Apply</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================ GUIDE PICKER ============================ -->
+  <section id="igg" aria-labelledby="igg-title">
+    <div class="in">
+      <div>
+        <p class="eyebrow">Free guides</p>
+        <h1 id="igg-title">Pick your guide.</h1>
+      </div>
+      <p class="lede">Start with the area that's giving you trouble. Each guide is free. All it takes is your email.</p>
+      <div class="grid">
+        <a class="card" data-igg href="https://app.irongangfit.com/back">
+          <span class="area">Low back</span>
+          <span class="for">For the back that locks up when you lift, bend, or sit too long.</span>
+          <span class="go">Get the back guide</span>
+        </a>
+        <a class="card" data-igg href="https://app.irongangfit.com/shoulder">
+          <span class="area">Shoulder</span>
+          <span class="for">For the shoulder that won't press overhead without arguing.</span>
+          <span class="go">Get the shoulder guide</span>
+        </a>
+      </div>
+      <p class="foot">Ready for a coach instead? <a href="/apply">Apply for coaching</a>.</p>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="igf-foot">
+    <div class="igf-wrap">
+      <div class="igf-foot-grid">
+        <div class="igf-foot-brand" style="display:flex;flex-direction:column;gap:20px">
+          <img src="https://images.squarespace-cdn.com/content/v1/6626bfc2221b6f7ad49c0f4d/1727a4fc-16aa-4f9c-a2eb-2516be9b825b/Iron+Gang+Logo+Banner.png?format=500w" alt="Iron Gang Fitness" style="height:62px;width:auto;display:block;align-self:flex-start">
+          <p>Science-based strength coaching for people who have been told to just rest it. We rebuild beat-up bodies so they can train like athletes again.</p>
+        </div>
+        <div class="igf-foot-col">
+          <div class="igf-foot-head">Site</div>
+          <a href="/" class="igf-foot-link">Home</a>
+          <a href="/guides" class="igf-foot-link">Free Guides</a>
+        </div>
+        <div class="igf-foot-col">
+          <div class="igf-foot-head">Find Us</div>
+          <div style="color:#e8e4dd;font-size:17px;font-weight:600;line-height:1.45">Elev8tion Fitness<br>Boca Raton, FL</div>
+          <a href="mailto:info@irongangfit.com" class="igf-foot-link">info@irongangfit.com</a>
+          <a href="https://www.instagram.com/irongangfitness" target="_blank" rel="noopener" class="igf-foot-link">Instagram</a>
+          <a href="/apply" class="igf-foot-apply">Apply for Coaching</a>
+        </div>
+      </div>
+      <div class="igf-foot-bottom">
+        <div class="igf-foot-copy">© 2026 Iron Gang Fitness. All rights reserved.</div>
+        <div class="igf-foot-tag">Built for humans. <span>Not algorithms.</span></div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script>
+{
+  /* Carry utm tags from this page onto the guide links so the app sees where the visitor came from. */
+  const q = new URLSearchParams(location.search);
+  const keep = new URLSearchParams();
+  for (const [k, v] of q) if (k.startsWith('utm_')) keep.set(k, v);
+  if ([...keep].length) document.querySelectorAll('#igg [data-igg]').forEach(a => {
+    const u = new URL(a.href); keep.forEach((v, k) => u.searchParams.set(k, v)); a.href = u.toString();
+  });
+}
+</script>
+
+<script>
+/* Full-width fix: measures where the Code Block actually sits and
+   stretches the design to the full browser width from there. */
+(function(){
+  function fit(root){
+    root.style.marginLeft = '0px';
+    root.style.width = 'auto';
+    var vw = document.documentElement.clientWidth;
+    var left = root.getBoundingClientRect().left;
+    root.style.width = vw + 'px';
+    root.style.marginLeft = (-left) + 'px';
+  }
+  function fitAll(){
+    var roots = document.querySelectorAll('.igf[id$="-root"]');
+    for (var i = 0; i < roots.length; i++) fit(roots[i]);
+  }
+  fitAll();
+  document.addEventListener('DOMContentLoaded', fitAll);
+  window.addEventListener('load', fitAll);
+  window.addEventListener('resize', fitAll);
+  setTimeout(fitAll, 600);
+})();
+</script>

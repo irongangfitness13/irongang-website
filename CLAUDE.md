@@ -12,6 +12,7 @@ snippet per page that loads it.
 - `pages/home.html`  → irongangfit.com/
 - `pages/apply.html` → irongangfit.com/apply
 - `pages/kgp.html`   → irongangfit.com/kgp (Killer Golf Performance spin-off; its CSS is at the top of this file)
+- `pages/guides.html` → irongangfit.com/guides (free guide picker; links to app.irongangfit.com/back and /shoulder)
 - `pages/card.html`  → KGP digital business card (Squarespace page URL set by the owner; hides the site header/footer)
 - `pages/igf-card.html` → Iron Gang Fitness digital business card (Squarespace page URL set by the owner; hides the site header/footer)
 - `assets/` — images for the card and `Josh-Gangaware-KGP.vcf` / `Josh-Gangaware-IGF.vcf` (the cards' "Save contact" files; edit them to change contact details), and `fonts/` for the IGF card
